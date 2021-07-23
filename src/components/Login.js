@@ -29,7 +29,7 @@ class Login extends React.Component {
       this.props.history.push('/bubblepage')
     })
     .catch(err => {
-      console.log(err.response.data.error);
+      console.log(err.response.error);
         this.setState({
             credentials: {
               ...this.state.credentials,

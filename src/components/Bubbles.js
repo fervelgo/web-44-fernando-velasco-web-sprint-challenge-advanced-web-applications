@@ -16,7 +16,7 @@ const Bubbles = ({ colors }) => {
   return (
     <div className="bubble-wrap">
       <p>Bubbles</p>
-      <Svg width={400} height={400}>
+      {/* <Svg width={400} height={400}>
         <Pack
           data={{
             children: bubbleData
@@ -46,7 +46,7 @@ const Bubbles = ({ colors }) => {
               .filter(v => v)
           }
         </Pack>
-      </Svg>
+      </Svg> */}
     </div>
   );
 };
