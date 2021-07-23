@@ -1,26 +1,66 @@
 import React from "react";
 
-const Login = () => {
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
+class Login extends React.Component {
+  state= {
+    credentials: {
+      username: '',
+      password: '',
+    }
+  }
 
-  const error = "";
+  handleChange = e => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    })
+  };
+
+  
+  login = e => {
+    // make a post request to retrieve a token from the api
+    // when you have handled the token, navigate to the BubblePage route
+  };
+  
+  // const error = "Username or Password incorrect.";
   //replace with error state
-
-  return (
-    <div>
+  
+  render () {
+    return (
+      <div>
       <h1>Welcome to the Bubble App!</h1>
       <div data-testid="loginForm" className="login-form">
-        <h2>Build login form here</h2>
+      <form>
+        <label>Username</label>
+        <input 
+        type= 'text'
+        name= 'username'
+        id='username'
+        value={this.state.credentials.username}
+        onChange={this.handleChange}
+        />
+        <label>Password</label>
+        <input 
+        id='password'
+        name='password'
+        type='password'
+        value={this.state.credentials.password}
+        onChange={this.handleChange}
+        />
+        <button>Login</button>
+      </form>
       </div>
-
-      <p id="error" className="error">{error}</p>
-    </div>
-  );
+      
+      {/* <p id="error" className="error">{error}</p> */}
+      </div>
+      );
+  };
+  
 };
 
-export default Login;
-
+  export default Login;
+  
 //Task List:
 //1. Build a form containing a username and password field.
 //2. Add whatever state necessary for form functioning.
