@@ -1,10 +1,12 @@
 import React from "react";
+import axios from 'axios';
 
 class Login extends React.Component {
   state= {
     credentials: {
       username: '',
       password: '',
+      error: ''
     }
   }
 
@@ -19,40 +21,52 @@ class Login extends React.Component {
 
   
   login = e => {
-    // make a post request to retrieve a token from the api
-    // when you have handled the token, navigate to the BubblePage route
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/login', this.state.credentials)
+    .then(res => {
+      console.log(res);
+      localStorage.setItem('token', res.data.payload);
+      this.props.history.push('/bubblepage')
+    })
+    .catch(err => {
+      console.log(err.response.data.error);
+        this.setState({
+            credentials: {
+              ...this.state.credentials,
+              error: err.response.data.error
+            }
+      })
+
+    })
   };
-  
-  // const error = "Username or Password incorrect.";
-  //replace with error state
   
   render () {
     return (
       <div>
       <h1>Welcome to the Bubble App!</h1>
-      <div data-testid="loginForm" className="login-form">
-      <form>
-        <label>Username</label>
-        <input 
-        type= 'text'
-        name= 'username'
-        id='username'
-        value={this.state.credentials.username}
-        onChange={this.handleChange}
-        />
-        <label>Password</label>
-        <input 
-        id='password'
-        name='password'
-        type='password'
-        value={this.state.credentials.password}
-        onChange={this.handleChange}
-        />
-        <button>Login</button>
-      </form>
-      </div>
+        <div data-testid="loginForm" className="login-form">
+          <form onSubmit={this.login}>
+              <label>Username</label>
+              <input 
+                type= 'text'
+                name= 'username'
+                id='username'
+                value={this.state.credentials.username}
+                onChange={this.handleChange}
+              />
+              <label>Password</label>
+              <input 
+                id='password'
+                name='password'
+                type='password'
+                value={this.state.credentials.password}
+                onChange={this.handleChange}
+              />
+              <button id="error">Login</button>
+          </form>
+        </div>
       
-      {/* <p id="error" className="error">{error}</p> */}
+      <p id="error" className="error">{this.state.credentials.error}</p>
       </div>
       );
   };

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Login from "./components/Login";
+import BubblePage from "./components/BubblePage";
 import "./styles.scss";
 
 //test change comment
@@ -15,7 +16,9 @@ function App() {
           <a data-testid="logoutButton" href="#">logout</a>
         </header> 
 
+        {/* <Route path="/bubblepage" component={BubblePage} /> */}
         <Route exact path="/" component={Login} />
+
       </div>
     </Router>
   );
