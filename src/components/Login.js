@@ -1,6 +1,8 @@
 import React from "react";
 import axios from 'axios';
 
+import fetchColorService from "../services/fetchColorService";
+
 class Login extends React.Component {
   state= {
     credentials: {
@@ -24,7 +26,6 @@ class Login extends React.Component {
     e.preventDefault();
     axios.post('http://localhost:5000/api/login', this.state.credentials)
     .then(res => {
-      console.log(res);
       localStorage.setItem('token', res.data.payload);
       this.props.history.push('/bubblepage')
     })
