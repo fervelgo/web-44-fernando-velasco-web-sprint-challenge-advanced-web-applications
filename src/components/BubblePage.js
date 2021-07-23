@@ -10,10 +10,6 @@ const BubblePage = () => {
   const [colors, setColors] = useState([]);
   const [editing, setEditing] = useState(false);
 
-  const { id } = useParams()
-
-  console.log('current id :', id);
-
   useEffect(() => {
     fetchColorService() 
     setColors(JSON.parse(localStorage.getItem('colors')))
